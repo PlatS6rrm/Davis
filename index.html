@@ -20,132 +20,48 @@ body {
   padding: 20px;
   gap: 20px;
 }
-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 0;
-}
+canvas { position: fixed; top: 0; left: 0; z-index: 0; }
+
 .card {
   width: 400px;
   border-radius: 20px;
   background: rgba(20,20,20,0.9);
-  box-shadow: 0 0 25px rgba(255,255,255,0.5), 0 0 60px rgba(255,255,255,0.3);
-  text-align: center;
+  box-shadow:0 0 25px rgba(255,255,255,0.5),0 0 60px rgba(255,255,255,0.3);
+  text-align:center;
   transition: transform 0.2s, box-shadow 0.4s;
-  position: relative;
-  z-index: 1;
-  overflow: hidden;
-  padding-bottom: 15px;
+  position: relative; z-index:1; overflow:hidden; padding-bottom:15px;
 }
-.card:hover {
-  box-shadow: 0 0 45px rgba(255,255,255,0.8), 0 0 100px rgba(255,255,255,0.5);
-}
-.card-header {
-  height: 140px;
-  width: 100%;
-  background: url("https://via.placeholder.com/400x140") center/cover no-repeat;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  position: relative;
-}
+.card:hover { box-shadow:0 0 45px rgba(255,255,255,0.8),0 0 100px rgba(255,255,255,0.5); }
+
+.card-header { height:140px;width:100%; background:url("https://via.placeholder.com/400x140") center/cover no-repeat; display:flex; justify-content:center; align-items:flex-end; position:relative; }
+
 .profile-pic {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  border: 3px solid #fff;
-  background: url("https://cdn.discordapp.com/avatars/1127218076618854532/e34ef63c5fc7733217c66f0a98c2fd02.png") center/cover no-repeat;
-  position: absolute;
-  bottom: -50px;
-  box-shadow: 0 0 20px #fff, 0 0 35px #fff;
+  width:100px; height:100px;
+  border-radius:50%;
+  border:3px solid #fff;
+  background:url("https://cdn.discordapp.com/avatars/1127218076618854532/e34ef63c5fc7733217c66f0a98c2fd02.png") center/cover no-repeat;
+  position:absolute; bottom:-50px;
+  box-shadow:0 0 20px #fff,0 0 35px #fff;
+  transition: box-shadow 0.1s linear;
 }
-.card-body {
-  margin-top: 70px;
-  padding: 10px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-}
-.card-body h2 {
-  margin: 0;
-  font-size: 24px;
-  color: #fff;
-  text-shadow: 0 0 10px #fff;
-}
-.card-body p {
-  margin: 4px 0;
-  font-size: 16px;
-  color: #ccc;
-  text-shadow: 0 0 5px #fff;
-}
-.badges, .stats, .social-links {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 10px;
-}
-.badge {
-  background: rgba(255,255,255,0.15);
-  padding: 5px 10px;
-  border-radius: 10px;
-  font-size: 13px;
-  color: #fff;
-  text-shadow: 0 0 5px #fff;
-  backdrop-filter: blur(5px);
-}
-.member-since {
-  color: #fff;
-  font-size: 13px;
-  text-shadow: 0 0 5px #fff;
-  background: rgba(255,255,255,0.08);
-  padding: 4px 10px;
-  border-radius: 8px;
-  backdrop-filter: blur(5px);
-}
-.social-links a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.15);
-  color: #fff;
-  font-size: 18px;
-  text-decoration: none;
-  box-shadow: 0 0 10px #fff;
-  transition: all 0.3s ease;
-}
-.social-links a:hover {
-  background: #fff;
-  color: #000;
-  transform: scale(1.3);
-  box-shadow: 0 0 25px #fff, 0 0 40px #fff;
-}
+
+.card-body { margin-top:70px; padding:10px 20px; display:flex; flex-direction:column; align-items:center; gap:8px; }
+.card-body h2 { margin:0; font-size:24px; color:#fff; text-shadow:0 0 10px #fff; }
+.card-body p { margin:4px 0; font-size:16px; color:#ccc; text-shadow:0 0 5px #fff; }
+.badges,.stats,.social-links { display:flex; justify-content:center; flex-wrap:wrap; gap:10px; margin-top:10px; }
+.badge { background:rgba(255,255,255,0.15); padding:5px 10px; border-radius:10px; font-size:13px; color:#fff; text-shadow:0 0 5px #fff; backdrop-filter:blur(5px); }
+.member-since { color:#fff; font-size:13px; text-shadow:0 0 5px #fff; background:rgba(255,255,255,0.08); padding:4px 10px; border-radius:8px; backdrop-filter:blur(5px); }
+.social-links a { display:flex; justify-content:center; align-items:center; width:38px; height:38px; border-radius:50%; background:rgba(255,255,255,0.15); color:#fff; font-size:18px; text-decoration:none; box-shadow:0 0 10px #fff; transition:all 0.3s ease; }
+.social-links a:hover { background:#fff; color:#000; transform:scale(1.3); box-shadow:0 0 25px #fff,0 0 40px #fff; }
+
 .spotify-container {
-  width: 380px;
-  height: auto;
-  border-radius: 8px;
-  background: rgba(20,20,20,0.9);
-  box-shadow: 0 0 20px rgba(255,255,255,0.4), 0 0 50px rgba(255,255,255,0.2);
-  position: relative;
-  z-index: 1;
-  overflow: hidden;
-  padding: 12px;
-  backdrop-filter: blur(10px);
+  width:380px; height:auto; border-radius:8px;
+  background:rgba(20,20,20,0.9);
+  box-shadow:0 0 20px rgba(255,255,255,0.4),0 0 50px rgba(255,255,255,0.2);
+  position:relative; z-index:1; overflow:hidden; padding:12px; backdrop-filter:blur(10px);
 }
-.spotify-container:hover {
-  box-shadow: 0 0 35px rgba(255,255,255,0.6), 0 0 80px rgba(255,255,255,0.4);
-}
-.spotify-player iframe {
-  border-radius: 6px;
-  display: block;
-  width: 100%;
-  height: 80px;
-}
+.spotify-container:hover { box-shadow:0 0 35px rgba(255,255,255,0.6),0 0 80px rgba(255,255,255,0.4); }
+.spotify-player iframe { border-radius:6px; display:block; width:100%; height:80px; border:none; }
 </style>
 </head>
 <body>
@@ -159,7 +75,7 @@ canvas {
     <p>𝙰̷𝚕̷𝚠̷𝚊̷𝚢̷𝚜̷ 𝚏̷𝚘̷𝚕̷𝚕̷𝚘̷𝚠̷ 𝚢̷𝚘̷𝚞̷𝚛̷ 𝚍̷𝚛̷𝚎̷𝚊̷𝚖̷𝚜̷.</p>
     <div class="badges">
       <span class="badge">💎 PRO</span>
-      <span class="badge">👁 0</span>
+      <span class="badge" id="views">👁 0</span>
     </div>
     <div class="stats">
       <div class="member-since">Member Since: Jul 8, 2023</div>
@@ -174,30 +90,30 @@ canvas {
 
 <div class="spotify-container">
   <div class="spotify-player">
-<iframe 
-  id="spotify-iframe"
-  title="Spotify Playlist"
-  src="https://open.spotify.com/embed/playlist/5FVISU1dHQ7sjZSPykKOBw?utm_source=generator&autoplay=1"
-  width="100%"
-  height="80"
-  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-  loading="lazy"
-  style="border: none; border-radius: 6px;">
-</iframe>
+    <iframe 
+      id="spotify-iframe"
+      title="Spotify Playlist"
+      src="https://open.spotify.com/embed/playlist/5FVISU1dHQ7sjZSPykKOBw?utm_source=generator&autoplay=1"
+      width="100%"
+      height="80"
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      loading="lazy">
+    </iframe>
   </div>
 </div>
 
 <script>
 const isMobile = /Android|iPhone|iPad|iPod|Windows Phone|webOS/i.test(navigator.userAgent);
 
+// Adjust config for mobile
 const config = {
-  dots: 120,
-  maxRadius: 3,
-  speed: 0.6,
-  lineDistance: 130,
-  mouseLineDistance: 160,
+  dots: isMobile ? 30 : 120,
+  maxRadius: isMobile ? 2 : 3,
+  speed: isMobile ? 0.3 : 0.6,
+  lineDistance: isMobile ? 80 : 130,
+  mouseLineDistance: isMobile ? 0 : 160,
   color: "#ffffff",
-  glow: true
+  glow: !isMobile
 };
 
 const canvas = document.getElementById("bg");
@@ -207,104 +123,113 @@ let height = canvas.height = window.innerHeight;
 const mouse = { x: null, y: null };
 
 if (!isMobile) {
-  window.addEventListener("mousemove", e => {
-    mouse.x = e.x;
-    mouse.y = e.y;
-  });
+  window.addEventListener("mousemove", e => { mouse.x = e.x; mouse.y = e.y; });
 }
 
-window.addEventListener("resize", () => {
-  width = canvas.width = window.innerWidth;
-  height = canvas.height = window.innerHeight;
-  init();
-});
+window.addEventListener("resize", () => { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; init(); });
 
+// Dot class
 class Dot {
   constructor() {
-    this.x = Math.random() * width;
-    this.y = Math.random() * height;
-    this.radius = Math.random() * config.maxRadius + 1;
-    this.vx = (Math.random() - 0.5) * config.speed;
-    this.vy = (Math.random() - 0.5) * config.speed;
+    this.x = Math.random()*width;
+    this.y = Math.random()*height;
+    this.radius = Math.random()*config.maxRadius+1;
+    this.vx = (Math.random()-0.5)*config.speed;
+    this.vy = (Math.random()-0.5)*config.speed;
   }
   draw() {
     ctx.beginPath();
-    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-    if (config.glow) {
-      ctx.shadowColor = config.color;
-      ctx.shadowBlur = 15;
-    } else ctx.shadowBlur = 0;
-    ctx.fillStyle = config.color;
+    ctx.arc(this.x,this.y,this.radius,0,Math.PI*2);
+    if(config.glow){ ctx.shadowColor=config.color; ctx.shadowBlur=15; } else ctx.shadowBlur=0;
+    ctx.fillStyle=config.color;
     ctx.fill();
   }
   update() {
-    this.x += this.vx;
-    this.y += this.vy;
-    if (this.x < 0 || this.x > width) this.vx *= -1;
-    if (this.y < 0 || this.y > height) this.vy *= -1;
+    this.x+=this.vx; this.y+=this.vy;
+    if(this.x<0||this.x>width)this.vx*=-1;
+    if(this.y<0||this.y>height)this.vy*=-1;
     this.draw();
   }
 }
 
 let dotsArray = [];
-function init() {
-  dotsArray = Array.from({ length: config.dots }, () => new Dot());
-}
+function init() { dotsArray = Array.from({length: config.dots}, () => new Dot()); }
 init();
 
 function connect() {
-  dotsArray.forEach((a, i) => {
-    for (let j = i; j < dotsArray.length; j++) {
+  dotsArray.forEach((a,i) => {
+    for(let j=i; j<dotsArray.length; j++) {
       const b = dotsArray[j];
-      const dx = a.x - b.x, dy = a.y - b.y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < config.lineDistance) {
+      const dx=a.x-b.x, dy=a.y-b.y;
+      const dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<config.lineDistance){
         ctx.beginPath();
-        ctx.strokeStyle = `rgba(255,255,255,${1 - dist / config.lineDistance})`;
-        ctx.lineWidth = 1;
-        if (config.glow) {
-          ctx.shadowBlur = 5;
-          ctx.shadowColor = "#fff";
-        }
-        ctx.moveTo(a.x, a.y);
-        ctx.lineTo(b.x, b.y);
-        ctx.stroke();
+        ctx.strokeStyle=`rgba(255,255,255,${1-dist/config.lineDistance})`;
+        ctx.lineWidth=1;
+        if(config.glow){ ctx.shadowBlur=5; ctx.shadowColor="#fff"; }
+        ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
       }
     }
-    if (!isMobile && mouse.x && mouse.y) {
-      const dx = a.x - mouse.x, dy = a.y - mouse.y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < config.mouseLineDistance) {
+    if(!isMobile && mouse.x && mouse.y){
+      const dx=a.x-mouse.x, dy=a.y-mouse.y;
+      const dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<config.mouseLineDistance){
         ctx.beginPath();
-        ctx.strokeStyle = `rgba(255,255,255,${1 - dist / config.mouseLineDistance})`;
-        ctx.lineWidth = 1;
-        ctx.moveTo(a.x, a.y);
-        ctx.lineTo(mouse.x, mouse.y);
-        ctx.stroke();
+        ctx.strokeStyle=`rgba(255,255,255,${1-dist/config.mouseLineDistance})`;
+        ctx.lineWidth=1;
+        ctx.moveTo(a.x,a.y); ctx.lineTo(mouse.x,mouse.y); ctx.stroke();
       }
     }
   });
 }
 
 function animate() {
-  ctx.clearRect(0, 0, width, height);
-  dotsArray.forEach(dot => dot.update());
+  ctx.clearRect(0,0,width,height);
+  dotsArray.forEach(dot=>dot.update());
   connect();
   requestAnimationFrame(animate);
 }
 animate();
 
+// Card tilt on desktop
 const card = document.getElementById("card");
-if (!isMobile) {
-  window.addEventListener("mousemove", e => {
-    const x = e.clientX / window.innerWidth - 0.5;
-    const y = e.clientY / window.innerHeight - 0.5;
-    card.style.transform = `rotateX(${-y * 15}deg) rotateY(${x * 15}deg)`;
+if(!isMobile){
+  window.addEventListener("mousemove", e=>{
+    const x = e.clientX/window.innerWidth-0.5;
+    const y = e.clientY/window.innerHeight-0.5;
+    card.style.transform = `rotateX(${-y*15}deg) rotateY(${x*15}deg)`;
   });
-  window.addEventListener("mouseleave", () => {
-    card.style.transform = "rotateX(0deg) rotateY(0deg)";
-  });
+  window.addEventListener("mouseleave", ()=>{ card.style.transform="rotateX(0deg) rotateY(0deg)"; });
 }
+
+// Profile picture glow based on distance
+const profilePic = document.querySelector('.profile-pic');
+function mapDistanceToGlow(distance,maxDistance,maxGlow){ return Math.max(0, maxGlow*(1-distance/maxDistance)); }
+
+if(!isMobile){
+  window.addEventListener('mousemove', e=>{
+    const rect = profilePic.getBoundingClientRect();
+    const picX = rect.left + rect.width/2;
+    const picY = rect.top + rect.height/2;
+    const dx = e.clientX - picX;
+    const dy = e.clientY - picY;
+    const distance = Math.sqrt(dx*dx + dy*dy);
+    const maxDistance = 300;
+    const maxGlow = 50;
+    const glow = mapDistanceToGlow(distance, maxDistance, maxGlow);
+    profilePic.style.boxShadow = `0 0 ${glow}px #fff, 0 0 ${glow*1.5}px #fff`;
+  });
+  window.addEventListener('mouseleave', () => { profilePic.style.boxShadow = '0 0 20px #fff, 0 0 35px #fff'; });
+} else {
+  profilePic.style.boxShadow = '0 0 15px #fff, 0 0 25px #fff';
+}
+
+// View Counter
+const views = document.getElementById("views");
+const count = localStorage.getItem("profileViews") || 0;
+const newCount = parseInt(count)+1;
+localStorage.setItem("profileViews", newCount);
+views.textContent = `👁 ${newCount}`;
 </script>
 </body>
 </html>
