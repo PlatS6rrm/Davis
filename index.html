@@ -62,6 +62,15 @@ canvas { position: fixed; top: 0; left: 0; z-index: 0; }
 }
 .spotify-container:hover { box-shadow:0 0 35px rgba(255,255,255,0.6),0 0 80px rgba(255,255,255,0.4); }
 .spotify-player iframe { border-radius:6px; display:block; width:100%; height:80px; border:none; }
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .card { width: 90%; padding-bottom: 10px; }
+  .spotify-container { width: 90%; padding: 8px; }
+  .card-body h2 { font-size: 20px; }
+  .card-body p { font-size: 14px; }
+  .profile-pic { width: 80px; height: 80px; bottom: -40px; }
+}
 </style>
 </head>
 <body>
@@ -103,9 +112,10 @@ canvas { position: fixed; top: 0; left: 0; z-index: 0; }
 </div>
 
 <script>
+// Detect mobile
 const isMobile = /Android|iPhone|iPad|iPod|Windows Phone|webOS/i.test(navigator.userAgent);
 
-// Adjust config for mobile
+// Dots config
 const config = {
   dots: isMobile ? 30 : 120,
   maxRadius: isMobile ? 2 : 3,
@@ -121,46 +131,29 @@ const ctx = canvas.getContext("2d");
 let width = canvas.width = window.innerWidth;
 let height = canvas.height = window.innerHeight;
 const mouse = { x: null, y: null };
-
-if (!isMobile) {
-  window.addEventListener("mousemove", e => { mouse.x = e.x; mouse.y = e.y; });
-}
-
+if(!isMobile) window.addEventListener("mousemove", e => { mouse.x=e.x; mouse.y=e.y; });
 window.addEventListener("resize", () => { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; init(); });
 
 // Dot class
 class Dot {
   constructor() {
-    this.x = Math.random()*width;
-    this.y = Math.random()*height;
-    this.radius = Math.random()*config.maxRadius+1;
-    this.vx = (Math.random()-0.5)*config.speed;
-    this.vy = (Math.random()-0.5)*config.speed;
+    this.x=Math.random()*width; this.y=Math.random()*height;
+    this.radius=Math.random()*config.maxRadius+1;
+    this.vx=(Math.random()-0.5)*config.speed; this.vy=(Math.random()-0.5)*config.speed;
   }
-  draw() {
-    ctx.beginPath();
-    ctx.arc(this.x,this.y,this.radius,0,Math.PI*2);
-    if(config.glow){ ctx.shadowColor=config.color; ctx.shadowBlur=15; } else ctx.shadowBlur=0;
-    ctx.fillStyle=config.color;
-    ctx.fill();
-  }
-  update() {
-    this.x+=this.vx; this.y+=this.vy;
-    if(this.x<0||this.x>width)this.vx*=-1;
-    if(this.y<0||this.y>height)this.vy*=-1;
-    this.draw();
-  }
+  draw() { ctx.beginPath(); ctx.arc(this.x,this.y,this.radius,0,Math.PI*2); if(config.glow){ctx.shadowColor=config.color;ctx.shadowBlur=15;}else ctx.shadowBlur=0; ctx.fillStyle=config.color; ctx.fill(); }
+  update() { this.x+=this.vx; this.y+=this.vy; if(this.x<0||this.x>width)this.vx*=-1; if(this.y<0||this.y>height)this.vy*=-1; this.draw(); }
 }
 
-let dotsArray = [];
-function init() { dotsArray = Array.from({length: config.dots}, () => new Dot()); }
+let dotsArray=[];
+function init(){ dotsArray=Array.from({length: config.dots}, ()=>new Dot()); }
 init();
 
-function connect() {
-  dotsArray.forEach((a,i) => {
-    for(let j=i; j<dotsArray.length; j++) {
-      const b = dotsArray[j];
-      const dx=a.x-b.x, dy=a.y-b.y;
+function connect(){
+  dotsArray.forEach((a,i)=>{
+    for(let j=i;j<dotsArray.length;j++){
+      const b=dotsArray[j];
+      const dx=a.x-b.x,dy=a.y-b.y;
       const dist=Math.sqrt(dx*dx+dy*dy);
       if(dist<config.lineDistance){
         ctx.beginPath();
@@ -171,57 +164,48 @@ function connect() {
       }
     }
     if(!isMobile && mouse.x && mouse.y){
-      const dx=a.x-mouse.x, dy=a.y-mouse.y;
+      const dx=a.x-mouse.x,dy=a.y-mouse.y;
       const dist=Math.sqrt(dx*dx+dy*dy);
       if(dist<config.mouseLineDistance){
         ctx.beginPath();
         ctx.strokeStyle=`rgba(255,255,255,${1-dist/config.mouseLineDistance})`;
         ctx.lineWidth=1;
-        ctx.moveTo(a.x,a.y); ctx.lineTo(mouse.x,mouse.y); ctx.stroke();
+        ctx.moveTo(a.x,a.y); ctx.lineTo(mouse.x,mouse.y);
+        ctx.stroke();
       }
     }
   });
 }
 
-function animate() {
-  ctx.clearRect(0,0,width,height);
-  dotsArray.forEach(dot=>dot.update());
-  connect();
-  requestAnimationFrame(animate);
-}
+function animate(){ ctx.clearRect(0,0,width,height); dotsArray.forEach(dot=>dot.update()); connect(); requestAnimationFrame(animate); }
 animate();
 
-// Card tilt on desktop
-const card = document.getElementById("card");
+// Card tilt
+const card=document.getElementById("card");
+const profilePic = document.querySelector('.profile-pic');
+
 if(!isMobile){
   window.addEventListener("mousemove", e=>{
-    const x = e.clientX/window.innerWidth-0.5;
-    const y = e.clientY/window.innerHeight-0.5;
-    card.style.transform = `rotateX(${-y*15}deg) rotateY(${x*15}deg)`;
+    const x=e.clientX/window.innerWidth-0.5;
+    const y=e.clientY/window.innerHeight-0.5;
+    card.style.transform=`rotateX(${-y*15}deg) rotateY(${x*15}deg)`;
+    
+    // Profile glow based on distance
+    const rect=profilePic.getBoundingClientRect();
+    const picX=rect.left+rect.width/2;
+    const picY=rect.top+rect.height/2;
+    const dx=e.clientX-picX;
+    const dy=e.clientY-picY;
+    const distance=Math.sqrt(dx*dx+dy*dy);
+    const glow=Math.max(0,50*(1-distance/300));
+    profilePic.style.boxShadow=`0 0 ${glow}px #fff, 0 0 ${glow*1.5}px #fff`;
   });
-  window.addEventListener("mouseleave", ()=>{ card.style.transform="rotateX(0deg) rotateY(0deg)"; });
-}
-
-// Profile picture glow based on distance
-const profilePic = document.querySelector('.profile-pic');
-function mapDistanceToGlow(distance,maxDistance,maxGlow){ return Math.max(0, maxGlow*(1-distance/maxDistance)); }
-
-if(!isMobile){
-  window.addEventListener('mousemove', e=>{
-    const rect = profilePic.getBoundingClientRect();
-    const picX = rect.left + rect.width/2;
-    const picY = rect.top + rect.height/2;
-    const dx = e.clientX - picX;
-    const dy = e.clientY - picY;
-    const distance = Math.sqrt(dx*dx + dy*dy);
-    const maxDistance = 300;
-    const maxGlow = 50;
-    const glow = mapDistanceToGlow(distance, maxDistance, maxGlow);
-    profilePic.style.boxShadow = `0 0 ${glow}px #fff, 0 0 ${glow*1.5}px #fff`;
+  window.addEventListener("mouseleave", ()=>{
+    card.style.transform="rotateX(0deg) rotateY(0deg)";
+    profilePic.style.boxShadow='0 0 20px #fff,0 0 35px #fff';
   });
-  window.addEventListener('mouseleave', () => { profilePic.style.boxShadow = '0 0 20px #fff, 0 0 35px #fff'; });
 } else {
-  profilePic.style.boxShadow = '0 0 15px #fff, 0 0 25px #fff';
+  profilePic.style.boxShadow='0 0 15px #fff,0 0 25px #fff';
 }
 
 // View Counter
