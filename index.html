@@ -17,9 +17,14 @@ body {
   height: 100vh;
   overflow: hidden;
   perspective: 1000px;
-  padding: 20px;
   gap: 20px;
+
+  /* Safe area padding to prevent overlap with mobile browser UI */
+  padding-top: calc(20px + env(safe-area-inset-top));
+  padding-left: 20px;
+  padding-right: 20px;
 }
+
 canvas { position: fixed; top: 0; left: 0; z-index: 0; }
 
 .card {
@@ -65,12 +70,13 @@ canvas { position: fixed; top: 0; left: 0; z-index: 0; }
 
 /* Mobile adjustments */
 @media (max-width: 768px) {
+  body { padding-top: calc(10px + env(safe-area-inset-top)); }
   .card { width: 90%; padding-bottom: 10px; }
   .spotify-container { width: 90%; padding: 8px; }
   .card-body h2 { font-size: 20px; }
   .card-body p { font-size: 14px; }
   .profile-pic { width: 80px; height: 80px; bottom: -40px; }
-  .spotify-player iframe { height: 60px; } /* smaller height on mobile */
+  .spotify-player iframe { height: 60px; }
 }
 </style>
 </head>
